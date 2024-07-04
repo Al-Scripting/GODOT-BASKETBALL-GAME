@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh8fidr7ckrxf"]
+
+[ext_resource type="Script" path="res://Scripts/Shooter.gd" id="1_g8mtn"]
+[ext_resource type="Texture2D" uid="uid://cc65jsms34ay" path="res://Sprites/Shooter_Blue.png" id="2_pnaci"]
+[ext_resource type="Texture2D" uid="uid://d0fkucvch7uhf" path="res://Sprites/Ball_Outlined.png" id="3_8nd27"]
+[ext_resource type="Texture2D" uid="uid://d28ecox5wmpg5" path="res://Sprites/Arrow Direction.png" id="4_2sgrx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cg5j2"]
+size = Vector2(58, 190)
+
+[node name="Shooter" type="CharacterBody2D"]
+position = Vector2(0, 1)
+script = ExtResource("1_g8mtn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pnaci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, 30)
+shape = SubResource("RectangleShape2D_cg5j2")
+
+[node name="Ball_Sprite" type="Sprite2D" parent="."]
+modulate = Color(0.487162, 0.243645, 0.157406, 1)
+position = Vector2(71, -99)
+texture = ExtResource("3_8nd27")
+
+[node name="Pivot" type="Node2D" parent="Ball_Sprite"]
+
+[node name="Arrow" type="Sprite2D" parent="Ball_Sprite/Pivot"]
+modulate = Color(0.168627, 1, 1, 1)
+position = Vector2(88, -2)
+rotation = 1.5589
+scale = Vector2(0.312625, 0.374371)
+texture = ExtResource("4_2sgrx")

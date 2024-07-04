@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://ftyarnodnayf"]
+
+[ext_resource type="Texture2D" uid="uid://caebmi4gahu2l" path="res://Sprites/Blank.png" id="2_mte4l"]
+
+[sub_resource type="GDScript" id="GDScript_xqh72"]
+script/source = "extends Node2D
+
+var Power : float = 1
+var Min_Power = 1 
+var Max_Power = 2 
+var Speed = 0.02
+var Going_up : bool = true
+var Bar
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	Bar = get_node(\"Bar\")
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Going_up:
+		Power += Speed
+		if Power > Max_Power:
+			Power = Max_Power
+			Going_up = false
+	else:
+		Power -= Speed
+		if Power < Min_Power:
+			Power = Min_Power
+			Going_up = true
+	Bar.scale.x = (Power - Min_Power) / (Max_Power - Min_Power)
+"
+
+[node name="Power_Bar" type="Node2D"]
+script = SubResource("GDScript_xqh72")
+
+[node name="Backing_1" type="Sprite2D" parent="."]
+modulate = Color(0.307435, 0.142044, 0.0518745, 1)
+scale = Vector2(6.44, 1)
+texture = ExtResource("2_mte4l")
+
+[node name="Backing_2" type="Sprite2D" parent="."]
+modulate = Color(0.473976, 0.473976, 0.473976, 1)
+scale = Vector2(6.16, 0.76)
+texture = ExtResource("2_mte4l")
+
+[node name="Bar" type="Node2D" parent="."]
+
+[node name="Meter" type="Sprite2D" parent="Bar"]
+modulate = Color(0.478421, 0.706016, 0.379954, 1)
+scale = Vector2(6.16, 0.72)
+texture = ExtResource("2_mte4l")

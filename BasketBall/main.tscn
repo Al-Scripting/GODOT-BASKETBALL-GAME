@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4pqt5af58lk2"]
+
+[ext_resource type="Script" path="res://Scene_Manager.gd" id="1_amvsq"]
+[ext_resource type="Texture2D" uid="uid://caebmi4gahu2l" path="res://Sprites/Blank.png" id="1_msuxt"]
+[ext_resource type="PackedScene" uid="uid://dh8fidr7ckrxf" path="res://Objects/Shooter.tscn" id="2_sor62"]
+[ext_resource type="PackedScene" uid="uid://c22wvffy84s1t" path="res://Objects/Blocker.tscn" id="3_7b2wp"]
+[ext_resource type="PackedScene" uid="uid://mb6l3lq17e3v" path="res://Objects/BasketBall_Net.tscn" id="5_vln7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igw3k"]
+size = Vector2(66, 67)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_amvsq")
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Player_1_Score" type="Label" parent="UI"]
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 112.0
+offset_bottom = 44.0
+text = "Player 1: 00"
+
+[node name="Player_2_Score" type="Label" parent="UI"]
+offset_left = 1029.0
+offset_top = 28.0
+offset_right = 1122.0
+offset_bottom = 51.0
+text = "Player 2: 00 "
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(879, 648)
+scale = Vector2(36.68, 0.599999)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+texture = ExtResource("1_msuxt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_igw3k")
+
+[node name="Floor4" type="StaticBody2D" parent="."]
+position = Vector2(860, -1)
+scale = Vector2(36.68, 0.599999)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor4"]
+texture = ExtResource("1_msuxt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor4"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_igw3k")
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+position = Vector2(1157, 673)
+rotation = -1.5708
+scale = Vector2(36.68, 0.599999)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor2"]
+texture = ExtResource("1_msuxt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_igw3k")
+
+[node name="Floor3" type="StaticBody2D" parent="."]
+position = Vector2(-1, 621)
+rotation = -1.5708
+scale = Vector2(36.68, 0.599999)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor3"]
+texture = ExtResource("1_msuxt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_igw3k")
+
+[node name="Shooter" parent="." instance=ExtResource("2_sor62")]
+z_index = 2
+position = Vector2(132, 476)
+
+[node name="Blocker" parent="." instance=ExtResource("3_7b2wp")]
+z_index = 2
+position = Vector2(677, 470)
+
+[node name="BasketBallNet" parent="." instance=ExtResource("5_vln7w")]
+position = Vector2(-63, -16)
+
+[connection signal="Switch_Shirts" from="." to="Shooter" method="_on_main_switch_shirts"]
+[connection signal="Switch_Shirts" from="." to="Blocker" method="_on_main_switch_shirts"]
+[connection signal="shoot" from="Shooter" to="." method="_on_shooter_shoot"]
+[connection signal="Score" from="BasketBallNet" to="." method="_on_basket_ball_net_score"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://mb6l3lq17e3v"]
+
+[ext_resource type="Script" path="res://Scripts/BasketBall_Net.gd" id="1_d4gts"]
+[ext_resource type="Texture2D" uid="uid://c8v6wfe1t8suj" path="res://Sprites/Rounded Box.png" id="2_2rb7q"]
+[ext_resource type="Texture2D" uid="uid://djdysx6lyglyf" path="res://Sprites/Rounded Box Outline.png" id="3_117fo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6pj13"]
+radius = 8.06226
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vf1ok"]
+size = Vector2(156, 6)
+
+[node name="BasketBallNet" type="Node2D"]
+z_index = 1
+script = ExtResource("1_d4gts")
+
+[node name="Pole" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.490196)
+position = Vector2(1029.26, 484.512)
+scale = Vector2(0.169844, 1.39444)
+texture = ExtResource("2_2rb7q")
+
+[node name="BackBoard" type="Sprite2D" parent="."]
+position = Vector2(1024, 252)
+scale = Vector2(1.08594, 1)
+texture = ExtResource("3_117fo")
+
+[node name="Net" type="Sprite2D" parent="."]
+modulate = Color(0.661691, 0.297509, 0.0676024, 1)
+position = Vector2(1026, 292)
+scale = Vector2(0.683594, 0.0761719)
+texture = ExtResource("2_2rb7q")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(950, 292)
+shape = SubResource("CircleShape2D_6pj13")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(161, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(950, 292)
+shape = SubResource("CircleShape2D_6pj13")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1026, 303)
+shape = SubResource("RectangleShape2D_vf1ok")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
